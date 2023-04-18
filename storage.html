@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <script src="jquery-3.6.3.min.js"></script>
+    <script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <label for="">name</label>
+    <input type="text" id="name">
+    <label for="">password</label>
+    <input type="number" id="pword">
+    <br><br>
+    <button type="submit" onclick="store()">signUp</button>
+    <button type="submit" onclick="fun()">signIn</button>
+<script>
+    // function store(){
+    //     let name =  document.getElementById("name").value;
+    //     let pword = String( document.getElementById("pword").value);
+    //     localStorage.setItem('lsname',name);
+    //     localStorage.setItem('lspword',pword);
+    //     let arr = [];
+    //     arr.push(localStorage.getItem('lsname'));
+    //     arr.push(localStorage.getItem('lspword'));
+    //  alert("your account is created!");
+    //  console.log(arr);
+    // }
+    // function fun(){
+    //     let name =  document.getElementById("name").value;
+    //     let pword = document.getElementById("pword").value;
+    //    let storedname = localStorage.getItem('lsname');
+    //    let storedpword = localStorage.getItem('lspword');
+    //   if(name == storedname && pword == storedpword){
+    //     alert("you are already sign in")
+    //   }else {
+    //    alert( "you'r not sign in")
+    //   }
+     
+    // }
+    function store(){
+    let name =  document.getElementById("name").value;
+    let pword = String( document.getElementById("pword").value);
+    let data = {name: name, pword: pword};
+    let arr = JSON.parse(localStorage.getItem('data')) || [];
+    arr.push(data);
+    localStorage.setItem('data', JSON.stringify(arr));
+    alert("your account is created!");
+    console.log(arr);
+}
+function fun(){
+    let name =  document.getElementById("name").value;
+    let pword = document.getElementById("pword").value;
+    let data = JSON.parse(localStorage.getItem('data')) || [];
+    let loggedIn = false;
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].name === name && data[i].pword === pword) {
+            alert("you are already signed in");
+            loggedIn = true;
+            break;
+        }
+    }
+    if (!loggedIn) {
+        alert("you're not signed in");
+    }
+}
+ 
+</script> 
+
+
+</body>
+</html>
